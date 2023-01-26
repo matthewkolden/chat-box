@@ -7,6 +7,7 @@
 const app = require('../app')
 const debug = require('debug')('chat-room:server')
 const http = require('http')
+const socketio = require('socket.io')
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +21,22 @@ app.set('port', port)
  */
 
 const server = http.createServer(app)
+
+// Create instance of socket.io
+const io = socketio(server)
+
+io.on('connection', (socket) => {
+  // Emit to single user
+  socket.emit('message', 'Chat is working')
+  // Emit to everyone except single user
+  socket.broadcast.emit('message', 'A user has joined the chat')
+
+  // When user disconnects
+  socket.on('disconnect', () => {
+    // Emit to everyone
+    io.emit('message', 'A user has left the chat')
+  })
+})
 
 /**
  * Listen on provided port, on all network interfaces.
