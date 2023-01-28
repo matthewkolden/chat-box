@@ -2,14 +2,14 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 
-const User = require('../models/user')
+const User = require('../models/User')
 
-router.get('/signup', (req, res) => {
-  res.render('user/Signup', { title: 'Signup' })
+router.get('/', (req, res) => {
+  res.render('Index', { title: 'Login' })
 })
 
-router.get('/login', (req, res) => {
-  res.render('user/Login', { title: 'Login' })
+router.get('/signup', (req, res) => {
+  res.render('Signup', { title: 'Signup' })
 })
 
 router.post('/signup', async (req, res) => {
@@ -23,14 +23,14 @@ router.post('/signup', async (req, res) => {
       password: hashedPassword,
     })
     console.log(createdUser)
-    res.redirect('/users/login')
+    res.redirect('/')
     // res.json(req.body)
   } catch (error) {
     res.status(500).send(error)
   }
 })
 
-router.post('/login', async (req, res) => {
+router.post('/', async (req, res) => {
   const { username, password } = req.body
   try {
     const foundUser = await User.findOne({ username })

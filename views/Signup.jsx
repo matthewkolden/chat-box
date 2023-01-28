@@ -1,17 +1,17 @@
 const React = require('react')
 const DefaultLayout = require('./layout/Default')
 
-class Index extends React.Component {
+class Signup extends React.Component {
   render() {
     return (
-      <DefaultLayout title="Login">
+      <DefaultLayout title="Signup">
         <form
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 text-black"
-          action="/"
+          action="/signup"
           method="POST"
         >
           <div className="mb-4">
-            <label htmlFor="username">Enter your username</label>
+            <label htmlFor="username">Create a username</label>
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               type="text"
@@ -22,7 +22,7 @@ class Index extends React.Component {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="password">Enter your password</label>
+            <label htmlFor="password">Create a password</label>
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               type="password"
@@ -37,10 +37,10 @@ class Index extends React.Component {
               className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
               type="submit"
               name=""
-              value="Login"
+              value="Signup"
             />
             <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-              <a href="/signup">Make an account</a>
+              <a href="/">Go back</a>
             </button>
           </div>
         </form>
@@ -48,5 +48,4 @@ class Index extends React.Component {
     )
   }
 }
-
-module.exports = Index
+module.exports = Signup
