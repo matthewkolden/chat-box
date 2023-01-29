@@ -45,8 +45,13 @@ app.use('/', userController)
 
 // Socket.io setup
 io.on('connection', (socket) => {
-  socket.on('new message', (data) => {
-    io.emit('new message', { user: data.user, msg: data.msg })
+  console.log('connected')
+  // socket.broadcast.emit('hello', 'world')
+  io.emit('hello', 'world')
+  socket.on('chat', (data) => {
+    console.log('data', data)
+    io.emit('sent message', data)
+    // io.emit('chat', { user: data.user, msg: data.msg })
   })
 })
 

@@ -18,7 +18,6 @@ class Signup extends React.Component {
               defaultValue=""
               name="username"
               id="username"
-              required
             />
           </div>
           <div className="mb-4">
@@ -29,7 +28,6 @@ class Signup extends React.Component {
               defaultValue=""
               name="password"
               id="password"
-              required
             />
           </div>
           <div className="flex items-center justify-between">
