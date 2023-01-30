@@ -5,14 +5,27 @@ const DefaultLayout = require('./layout/Default')
 class Chatroom extends React.Component {
   render() {
     // const socket = io()
-
-    const { messages } = this.props
-
     return (
       <DefaultLayout>
-        <div>
-          <h1>Chat</h1>
-          <ul id="past-messages"></ul>
+        <div className="w-9/12">
+          <form
+            className="flex mb-4 justify-between"
+            action="/logout?_method=DELETE"
+            method="POST"
+          >
+            <h1 className="text-4xl">Chat</h1>
+            <button
+              type="submit"
+              className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            >
+              Logout
+            </button>
+          </form>
+
+          <ul
+            id="past-messages"
+            className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 text-black h-96 max-h-96 overflow-scroll scroll-auto"
+          ></ul>
           <form action="/chatroom" method="POST" id="chat">
             <div className="flex items-center justify-between">
               <input
@@ -23,7 +36,7 @@ class Chatroom extends React.Component {
                 placeholder="Message"
               />
               <button
-                className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                className="ml-4 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
                 type="submit"
               >
                 Send

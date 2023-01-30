@@ -9,7 +9,15 @@ const logger = require('morgan')
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
+const session = require('express-session')
+const flash = require('express-flash')
+const MongoStore = require('connect-mongo')
 const methodOverride = require('method-override')
+const passport = require('passport')
+
+const initializePassport = require('./middleware/passport-config')
+
+initializePassport(passport)
 
 const PORT = process.env.PORT || '3000'
 
@@ -33,6 +41,22 @@ app.use(express.static('public'))
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use((req, res, next) => {
+  res.locals.data = {}
+  next()
+})
+
+app.use(flash())
+app.use(
+  session({
+    secret: process.env.SECRET,
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+    saveUninitialized: false,
+    resave: false,
+  })
+)
+app.use(passport.initialize())
+app.use(passport.session())
 
 // View engine
 app.set('view engine', 'jsx')
