@@ -6,7 +6,7 @@ const messageSchema = new mongoose.Schema({
   },
   msg: {
     type: String,
-    required: 'Message required',
+    // required: 'Message required',
   },
 })
 

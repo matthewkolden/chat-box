@@ -1,4 +1,5 @@
 require('dotenv').config()
+const User = require('./models/User')
 
 /**
  * Requirements
@@ -64,18 +65,24 @@ app.engine('jsx', require('jsx-view-engine').createEngine())
 
 // Controller middlewares
 app.set('socketio', io)
-app.use('/chatroom', chatroomController)
+app.use('/chat', chatroomController)
 app.use('/', userController)
 
 // Socket.io setup
+
 io.on('connection', (socket) => {
   console.log('connected')
   // socket.broadcast.emit('hello', 'world')
-  io.emit('hello', 'world')
   socket.on('chat', (data) => {
-    console.log('data', data)
-    io.emit('sent message', data)
+    socket.join(data.id)
+    console.log(data.id, data.msg)
+    io.to(data.id).emit('sent message', data.msg)
+    // io.emit('sent message', data)
     // io.emit('chat', { user: data.user, msg: data.msg })
+  })
+  socket.on('join-room', (data, roomId) => {
+    socket.join(roomId)
+    io.to(roomId).emit('chat')
   })
 })
 

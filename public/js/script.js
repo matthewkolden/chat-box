@@ -4,7 +4,7 @@
 // socket.on('disconnect', () =>{' '}
 // {console.log(socket.id)})
 
-// import { io } from ('socket.io-client')
+// const io = require('socket.io-client')
 const socket = io('http://localhost:3000')
 
 // this.socket.on('connect', () => {
@@ -18,6 +18,12 @@ const socket = io('http://localhost:3000')
 const form = document.getElementById('chat')
 const msg = document.getElementById('msg')
 const pastMsg = document.getElementById('past-messages')
+const roomId = document.getElementById('room-id').innerText
+
+socket.on('connect', () => {
+  console.log(socket.id)
+  socket.emit('join-room', roomId)
+})
 
 socket.on('sent message', (data) => {
   const li = document.createElement('li')
@@ -26,10 +32,11 @@ socket.on('sent message', (data) => {
 })
 
 form.addEventListener('submit', (e) => {
-  const message = msg.value
   e.preventDefault()
+  const message = msg.value
+  console.log(roomId, 'this is my id')
   if (message) {
-    socket.emit('chat', message)
+    socket.emit('chat', { msg: message, id: roomId })
     msg.value = ''
   }
 
