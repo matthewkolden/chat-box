@@ -7,7 +7,10 @@ const chatroomSchema = new mongoose.Schema({
   },
   code: {
     type: String,
-    required: 'Code is required',
+    unique: true,
+  },
+  user: {
+    type: String,
   },
 })
 
