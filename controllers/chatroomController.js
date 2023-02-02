@@ -9,7 +9,7 @@ const User = require('../models/User')
 // Index
 router.get('/', checkAuthenticated, async (req, res) => {
   const currentUser = await User.findById(req.session.passport.user)
-  Chatroom.find({ user: currentUser.username }, async (err, allChats) => {
+  Chatroom.find({ user: currentUser.username }, (err, allChats) => {
     console.log(allChats)
     res.render('Dashboard', {
       user: currentUser.username,
@@ -20,21 +20,18 @@ router.get('/', checkAuthenticated, async (req, res) => {
 
 // Chatroom
 router.get('/:id', async (req, res) => {
+  const currentUser = await User.findById(req.session.passport.user)
   try {
     await Chatroom.findById(req.params.id, (err, chatroom) => {
       res.render('Chatroom', {
         chat: chatroom,
         id: String(chatroom._id),
+        user: currentUser.username,
       })
     })
   } catch (error) {
     console.log(error)
   }
-})
-
-router.get('/join', async (req, res) => {
-  try {
-  } catch (error) {}
 })
 
 // Create
@@ -58,6 +55,22 @@ router.post('/', async (req, res) => {
 router.delete('/:id', (req, res) => {
   Chatroom.findByIdAndRemove(req.params.id, (err, data) => {
     res.redirect('/chat')
+  })
+})
+
+// Edit
+router.get('/edit/:id', checkAuthenticated, (req, res) => {
+  Chatroom.findById(req.params.id, (err, chatroom) => {
+    res.render('Edit', {
+      chat: chatroom,
+    })
+  })
+})
+
+// Update
+router.put('/edit/:id', (req, res) => {
+  Chatroom.findByIdAndUpdate(req.params.id, req.body, (err, updateChat) => {
+    res.redirect(`/chat/edit/${req.params.id}`)
   })
 })
 

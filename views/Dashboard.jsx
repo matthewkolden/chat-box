@@ -72,17 +72,10 @@ class Dashboard extends React.Component {
                       <button className="m-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                         <a href={`/chat/${chatroom._id}`}>Join</a>
                       </button>
-                      <form
-                        action={`/chat/${chatroom._id}?_method=DELETE`}
-                        method="POST"
-                      >
-                        <button
-                          type="submit"
-                          className="m-2 bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 border-b-4 border-orange-700 hover:border-orange-500 rounded"
-                        >
-                          Delete
-                        </button>
-                      </form>
+
+                      <button className="m-2 bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 border-b-4 border-orange-700 hover:border-orange-500 rounded">
+                        <a href={`/chat/edit/${chatroom._id}`}>Edit</a>
+                      </button>
                     </div>
                   </div>
                 )
