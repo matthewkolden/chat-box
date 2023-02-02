@@ -70,13 +70,21 @@ app.use('/', userController)
 
 // Socket.io setup
 
+const users = {}
+
 io.on('connection', (socket) => {
-  console.log('connected')
+  socket.on('new-user', (user) => {
+    users[socket.id] = user
+    socket.broadcast.emit('user-connected', user)
+  })
   // socket.broadcast.emit('hello', 'world')
   socket.on('chat', (data) => {
     socket.join(data.id)
-    console.log(data.id, data.msg)
-    io.to(data.id).emit('sent message', data.msg)
+    console.log(data.name, data.id, data.msg)
+    io.to(data.id).emit('sent message', {
+      message: data.msg,
+      user: data.name,
+    })
     // io.emit('sent message', data)
     // io.emit('chat', { user: data.user, msg: data.msg })
   })

@@ -19,6 +19,9 @@ const form = document.getElementById('chat')
 const msg = document.getElementById('msg')
 const pastMsg = document.getElementById('past-messages')
 const roomId = document.getElementById('room-id').innerText
+const user = document.getElementById('user').innerText
+
+socket.emit('new-user', user)
 
 socket.on('connect', () => {
   console.log(socket.id)
@@ -27,8 +30,15 @@ socket.on('connect', () => {
 
 socket.on('sent message', (data) => {
   const li = document.createElement('li')
-  li.innerText = data
+  li.innerText = `${data.user}:${data.message}`
   pastMsg.append(li)
+})
+
+socket.on('user-connected', (user) => {
+  const li = document.createElement('li')
+  msg = `${user} connected`
+  li.innerText = data
+  msg.append(li)
 })
 
 form.addEventListener('submit', (e) => {
@@ -36,7 +46,7 @@ form.addEventListener('submit', (e) => {
   const message = msg.value
   console.log(roomId, 'this is my id')
   if (message) {
-    socket.emit('chat', { msg: message, id: roomId })
+    socket.emit('chat', { msg: message, id: roomId, name: user })
     msg.value = ''
   }
 
