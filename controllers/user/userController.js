@@ -2,9 +2,11 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
-const { checkNotAuthenticated } = require('../middleware/checkAuthentication')
+const {
+  checkNotAuthenticated,
+} = require('../../middleware/checkAuthentication')
 
-const User = require('../models/User')
+const User = require('../../models/User')
 
 router.get('/', checkNotAuthenticated, (req, res) => {
   res.render('Index')
@@ -25,9 +27,7 @@ router.post('/signup', checkNotAuthenticated, async (req, res) => {
       // password,
       password: hashedPassword,
     })
-    console.log(createdUser)
     res.redirect('/')
-    // res.json(req.body)
   } catch (error) {
     console.log(error)
     res.redirect('/')
@@ -39,7 +39,7 @@ router.post(
   '/',
   checkNotAuthenticated,
   passport.authenticate('local', {
-    successRedirect: '/chatroom',
+    successRedirect: '/chat',
     failureRedirect: '/',
     failureFlash: true,
   })

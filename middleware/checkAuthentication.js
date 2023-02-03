@@ -7,7 +7,7 @@ const checkAuthenticated = (req, res, next) => {
 
 const checkNotAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
-    return res.redirect('/chatroom')
+    return res.redirect('/chat')
   }
   next()
 }
