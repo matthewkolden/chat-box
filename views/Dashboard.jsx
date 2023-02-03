@@ -7,7 +7,7 @@ class Dashboard extends React.Component {
 
     return (
       <DefaultLayout>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-9/12">
           <form
             className="flex mb-4 justify-between"
             action="/logout?_method=DELETE"

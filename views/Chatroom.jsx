@@ -5,25 +5,28 @@ const DefaultLayout = require('./layout/Default')
 class Chatroom extends React.Component {
   render() {
     // const socket = io()
-    const id = this.props.id
+    const { id, user, chat } = this.props
     return (
       <DefaultLayout>
         <div className="w-9/12">
           <div className="flex mb-4 justify-between">
-            <form action="/logout?_method=DELETE" method="POST">
-              <h1 id="room-id" className="hidden text-4xl">
-                {id}
-              </h1>
-              <button
-                type="submit"
-                className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-              >
-                Logout
+            <h1 className="text-4xl">{chat.name}</h1>
+            <div className="flex">
+              <form action="/logout?_method=DELETE" method="POST">
+                <h1 id="room-id" className="hidden text-4xl">
+                  {id}
+                </h1>
+                <button
+                  type="submit"
+                  className="mr-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                >
+                  Logout
+                </button>
+              </form>
+              <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                <a href="/chat">Go back</a>
               </button>
-            </form>
-            <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-              <a href="/chat">Go back</a>
-            </button>
+            </div>
           </div>
           <ul
             id="past-messages"
@@ -46,6 +49,9 @@ class Chatroom extends React.Component {
               </button>
             </div>
           </form>
+          <h3 id="user" className="mt-4 text-2xl">
+            {user}
+          </h3>
         </div>
       </DefaultLayout>
     )

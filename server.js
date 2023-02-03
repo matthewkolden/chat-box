@@ -35,16 +35,18 @@ app.use('/chat', chatroomController)
 app.use('/', userController)
 
 // Socket.io server-side setup
-const users = {}
 
 io.on('connection', (socket) => {
+  const users = {}
+  let id
   socket.on('new-user', (user) => {
     users[socket.id] = user
   })
 
   socket.on('join-room', (roomId) => {
-    socket.join(roomId)
-    io.to(roomId).emit('user-connected', users[socket.id])
+    id = roomId
+    socket.join(id)
+    io.to(id).emit('user-connected', users[socket.id])
   })
 
   socket.on('chat', (data) => {
@@ -53,6 +55,10 @@ io.on('connection', (socket) => {
       message: data.msg,
       user: data.name,
     })
+  })
+
+  socket.on('disconnect', () => {
+    socket.broadcast.to(id).emit('user-disconnected', users[socket.id])
   })
 })
 

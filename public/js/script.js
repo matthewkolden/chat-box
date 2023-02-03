@@ -24,7 +24,6 @@ const user = document.getElementById('user').innerText
 socket.emit('new-user', user)
 
 socket.on('connect', () => {
-  console.log(socket.id)
   socket.emit('join-room', roomId)
 })
 
@@ -36,9 +35,18 @@ socket.on('sent message', (data) => {
 
 socket.on('user-connected', (user) => {
   const li = document.createElement('li')
-  msg = `${user} connected`
-  li.innerText = data
-  msg.append(li)
+  if (user) {
+    li.innerText = `${user} joined`
+    pastMsg.append(li)
+  }
+})
+
+socket.on('user-disconnected', (user) => {
+  const li = document.createElement('li')
+  if (user) {
+    li.innerText = `${user} left`
+    pastMsg.append(li)
+  }
 })
 
 form.addEventListener('submit', (e) => {
@@ -49,7 +57,4 @@ form.addEventListener('submit', (e) => {
     socket.emit('chat', { msg: message, id: roomId, name: user })
     msg.value = ''
   }
-
-  console.log(msg.value)
-  console.log('Just hit the submit button')
 })
