@@ -23,7 +23,7 @@ A CRUD application built using Node.js, Express, Socket.io, Passport, Bcrypt, an
 
 ### Deployment
 
-In progress...
+Chat Box is live at [chat-box-live.herokuapp.com](https://chat-box-live.herokuapp.com/)
 
 ## Technologies used
 
