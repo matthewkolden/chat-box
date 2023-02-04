@@ -9,7 +9,7 @@ const {
 const User = require('../../models/User')
 
 router.get('/', checkNotAuthenticated, (req, res) => {
-  res.render('Index')
+  res.render('Login')
 })
 
 router.get('/signup', checkNotAuthenticated, (req, res) => {
@@ -24,7 +24,6 @@ router.post('/signup', checkNotAuthenticated, async (req, res) => {
 
     const createdUser = await User.create({
       username,
-      // password,
       password: hashedPassword,
     })
     res.redirect('/')

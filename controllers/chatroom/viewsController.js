@@ -2,13 +2,13 @@ const RESOURCE_PATH = '/chat'
 
 const viewController = {
   index(req, res) {
-    res.render('Dashboard', res.locals.data)
+    res.render('Index', res.locals.data)
   },
   chatroom(req, res) {
     res.render('Chatroom', res.locals.data)
   },
   create(req, res) {
-    res.redirect(RESOURCE_PATH + `/${res.locals.data.id}`)
+    res.redirect(RESOURCE_PATH)
   },
   edit(req, res) {
     const { chat, user } = res.locals.data

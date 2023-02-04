@@ -1,19 +1,4 @@
-// const socket = io()
-// socket.on('connect', () =>{' '}
-// {console.log(socket.id)})
-// socket.on('disconnect', () =>{' '}
-// {console.log(socket.id)})
-
-// const io = require('socket.io-client')
 const socket = io('http://localhost:3000')
-
-// this.socket.on('connect', () => {
-//   console.log('Hello World')
-// })
-
-// this.socket.on('disconnect', () => {
-//   console.log(socket.id)
-// })
 
 const form = document.getElementById('chat')
 const msg = document.getElementById('msg')
@@ -52,7 +37,6 @@ socket.on('user-disconnected', (user) => {
 form.addEventListener('submit', (e) => {
   e.preventDefault()
   const message = msg.value
-  console.log(roomId, 'this is my id')
   if (message) {
     socket.emit('chat', { msg: message, id: roomId, name: user })
     msg.value = ''
