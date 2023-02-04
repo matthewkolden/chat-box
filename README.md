@@ -13,7 +13,7 @@ A CRUD application built using Node.js, Express, Socket.io, Passport, Bcrypt, an
 - Real-time communication using Socket.io
 - Data storage with MongoDB
 
-## How to use
+## Getting Started
 
 1.  Create an account by clicking on the "Make an account" button.
 2.  Log in to your account.
@@ -34,6 +34,26 @@ Chat Box is live at [chat-box-live.herokuapp.com](https://chat-box-live.herokuap
 - [Bcrypt](https://github.com/kelektiv/node.bcrypt.js/) - Library for hashing passwords
 - [MongoDB](https://www.mongodb.com/) - NoSQL document database
 - [JSX](https://reactjs.org/docs/introducing-jsx.html) - Syntax extension for React
+
+## Routes
+
+### Chatroom Routes
+| Route | URL Path | HTTP Method | Purpose |
+|--|--| --| --|
+| Index | /chat | GET | Display all of user's chats | 
+| Create | /chat | POST | Create a new chatroom |
+| Delete | /chat/:id | DELETE | Delete a chatroom |
+| Edit | /edit/:id | GET | Offers form to edit chatroom's name |
+| Update | /edit/:id | PUT | Updates chatroom's name |
+| Join | /join | POST | Allows user to enter chatroom |
+
+### User Routes
+| Route | URL Path | HTTP Method | Purpose |
+|--|--| --| --|
+| Login | / | GET | Offers form to log in | 
+| Login | / | POST | Login to create session |
+| Signup | /signup | GET | Offers form to sign in |
+| Create | /signup | POST | Create a new user |
 
 ## Next Steps
 
