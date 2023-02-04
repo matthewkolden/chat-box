@@ -1,7 +1,7 @@
 # Chat Box
 
-A CRUD application built using Node.js, Express, Socket.io, Passport, Bcrypt, and MongoDB that allows users to create and manage chat rooms.
 ![chatroom example](readme/chatroom.png)
+A CRUD application built using Node.js, Express, Socket.io, Passport, Bcrypt, and MongoDB that allows users to create and manage chat rooms.
 
 ## Features
 
